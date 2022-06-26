@@ -14,15 +14,13 @@ fn window_conf() -> Conf {
 
 #[macroquad::main(window_conf)]
 async fn main() {
-    let font = load_ttf_font("./font.ttf").await.unwrap();
     let mut board = [["", "", ""], ["", "", ""], ["", "", ""]];
     let mut turn = "x";
     let mut game_on = true;
 
     let text_params = TextParams {
         font_size: 200,
-        // font,
-        color: Color::from_rgba(0, 0, 0, 255),
+R        color: Color::from_rgba(0, 0, 0, 255),
         ..Default::default()
     };
 
@@ -53,7 +51,6 @@ async fn main() {
             let tile_x = (mouse_x / (screen_width() / 3.0)).floor() as usize;
             let tile_y = (mouse_y / (screen_height() / 3.0)).floor() as usize;
             if board[tile_y][tile_x] == "" {
-
                 // Set board field to turn
                 board[tile_y][tile_x] = turn;
                 // Swap turns
@@ -63,7 +60,6 @@ async fn main() {
                     turn = "x";
                 }
                 check_winning_conditions(&board, &mut game_on);
-                // println!("{}{}{}\n{}{}{}\n{}{}{}", board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2], board[2][0], board[2][1], board[2][2]);
             }
         }
 
@@ -75,7 +71,6 @@ fn check_winning_conditions(&board: &[[&str; 3]; 3], game_on: &mut bool) {
     // check verticals
     for i in 0..3 {
         if board[i][0] != "" && board[i][1] != "" && board[i][2] != "" {
-            println!("checking x {} : {} {} {}", i, board[i][0], board[i][1], board[i][2]);
             if board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] == board[i][2] {
                 println!("Won by horizontal match");
                 *game_on = false;
