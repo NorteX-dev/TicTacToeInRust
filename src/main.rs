@@ -20,7 +20,7 @@ async fn main() {
 
     let text_params = TextParams {
         font_size: 200,
-R        color: Color::from_rgba(0, 0, 0, 255),
+        color: Color::from_rgba(0, 0, 0, 255),
         ..Default::default()
     };
 
